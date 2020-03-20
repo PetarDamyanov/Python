@@ -1,3 +1,4 @@
+from random import randint
 class Song(object):
 	title="Unknown"
 	artist="Unknown"
@@ -44,6 +45,8 @@ class Playlist:
 	lst=[]
 	repeat=False
 	shuffle=False
+	counter=0
+	played=[]
 	def __init__(self, name,repeat=False,shuffle=False):
 		self.name=name
 		if repeat==True:
@@ -81,17 +84,41 @@ class Playlist:
 			m-=60
 			h+=1
 		return "{0}:{1}:{2}".format(h,m,s)
+	
 	def __getittem__(self,index):
 		return self.lst[index]
+
 	def artists(self):
 		l_cheked=[]
 		for x in self.lst:
 			if l_cheked.count(x.artist)==0:
 				print("{0}->{1}".format(x.artist,self.lst.count(x)))
-				# print(x.artist)
+
+				print(x.artist)
 				l_cheked.append(x.artist)
 	
-	def next_song():
-		pass
+	def next_song(self):
+		# played=[]
+		if self.repeat==True:
+			self.counter+=1
+			if self.counter==len(self.lst)-1:
+				self.counter=0
+			return self.lst[self.counter]
+		if self.shuffle==True:
+			self.counter+=1
+			if self.counter==len(self.lst)-1:
+				self.counter=0
+				self.played=[]
+			n=randint(0,len(self.lst)-1)
+			for x in self.played:
+				while self.played.count(self.lst[n])==0:
+					n=randint(0,len(self.lst))
+
+			self.played.append(self.lst[n])
+			return self.lst[n]
+		if self.counter<len(self.lst):
+			self.counter+=1
+		return self.lst[self.counter]
+					
 	def __len__(self):
 		return len(self.lst)

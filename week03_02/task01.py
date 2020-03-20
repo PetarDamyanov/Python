@@ -30,8 +30,10 @@ class Term(object):
 class Polynomial(object):
 	"""docstring for Polynomial"""
 	lst=[]
+	signs=[]
 	def __init__(self, st=None):
 		self.lst=[]
+		self.signs=[]
 		if st!=None:
 			for x in st.split("+"):
 				self.lst.append(Term(x))

@@ -81,19 +81,6 @@ class TestPlayList(unittest.TestCase):
 		self.assertTrue(len(pl3)==3)
 
 
-	def test_playlist_cls_add_list_songs(self):
-		pl3=Playlist("test3")
-		t1=Song("Odin1", "Manowar", "The Sons of Odin1", "23:24")
-		t2=Song("Odin2", "Manowar", "The Sons of Odin2", "13:44")
-		t3=Song("Odin3", "Manowar3", "The Sons of Odin3", "23:44")
-		try:
-			# pl.add_song(t1)
-			pl3.add_songs([t1,t2,t3])
-			# pl.add_song(t2)
-		except Exception as e:
-			raise e
-		pl3.artists()
-		# self.assertTrue(len(pl3)==3)
 
 	def test_playlist_cls_legnth_total(self):
 		pl=Playlist("test3")
@@ -101,16 +88,73 @@ class TestPlayList(unittest.TestCase):
 		t2=Song("Odin2", "Manowar2", "The Sons of Odin2", "13:44")
 		t3=Song("Odin3", "Manowar3", "The Sons of Odin3", "23:44")
 		try:
-			# pl.add_song(t1)
 			pl.add_songs([t1,t2,t3])
-			# pl.add_song(t2)
 		except Exception as e:
 			raise e
-		# pl.artists()
-		# print(pl.total_lenght())
 		self.assertTrue(pl.total_lenght()=="1:0:52")
 
-
+	def test_playlist_cls_add_list_songs(self):
+		pl3=Playlist("test3")
+		t1=Song("Odin1", "Manowar", "The Sons of Odin1", "23:24")
+		t2=Song("Odin2", "Manowar", "The Sons of Odin2", "13:44")
+		t3=Song("Odin3", "Manowar3", "The Sons of Odin3", "23:44")
+		try:
+			pl3.add_songs([t1,t2,t3])
+		except Exception as e:
+			raise e
+		# pl3.artists()
+		# self.assertTrue(len(pl3)==3)
+	def test_playlist_cls_next_song_no_stuff(self):
+		pl=Playlist("test3")
+		t1=Song("Odin1", "Manowar", "The Sons of Odin1", "23:24")
+		t2=Song("Odin2", "Manowar", "The Sons of Odin2", "13:44")
+		t3=Song("Odin3", "Manowar3", "The Sons of Odin3", "23:44")
+		s=t2
+		try:
+			pl.add_songs([t1,t2,t3])
+		except Exception as e:
+			raise e
+		try:
+			h=pl.next_song()
+		except Exception as e:
+			raise e
+		self.assertEqual(str(h),str(s))
+			# self.assertTrue(len(pl3)==3)
+	def test_playlist_cls_next_song_repeat(self):
+		pl=Playlist("test3",repeat=True)
+		t1=Song("Odin1", "Manowar", "The Sons of Odin1", "23:24")
+		t2=Song("Odin2", "Manowar", "The Sons of Odin2", "13:44")
+		t3=Song("Odin3", "Manowar3", "The Sons of Odin3", "23:44")
+		s=t1
+		try:
+			pl.add_songs([t1,t2,t3])
+		except Exception as e:
+			raise e
+		try:
+			pl.next_song()
+			h=pl.next_song()
+			# pl.next_song()
+			# for x in range(1,6):
+			# 	print(pl.next_song())
+		except Exception as e:
+			raise e
+		self.assertEqual(str(h),str(s))
+			# self.assertTrue(len(pl3)==3)
+	def test_playlist_cls_next_song_shuffle(self):
+		pl=Playlist("test3",shuffle=True)
+		t1=Song("Odin1", "Manowar", "The Sons of Odin1", "23:24")
+		t2=Song("Odin2", "Manowar", "The Sons of Odin2", "13:44")
+		t3=Song("Odin3", "Manowar3", "The Sons of Odin3", "23:44")
+		s=t2
+		try:
+			pl.add_songs([t1,t2,t3])
+		except Exception as e:
+			raise e
+		try:
+			h=pl.next_song()
+		except Exception as e:
+			raise e
+		self.assertEqual(str(h),str(s))
 
 if __name__ == '__main__':
 	unittest.main()
