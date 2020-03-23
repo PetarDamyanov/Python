@@ -1,0 +1,11 @@
+git add .
+git commit -m"wtf message"
+git push remoteName master
+
+git pull->stop other shit branches
+
+git branch name create branch for idk why
+
+git status -> look at shit
+
+git remote -> see connections
