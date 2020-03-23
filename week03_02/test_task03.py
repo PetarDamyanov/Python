@@ -39,6 +39,15 @@ class TestBowlingGame(unittest.TestCase):
 		except Exception as e:
 			raise e
 		self.assertEqual(t,exp)
+	
+	def test_bg_cls_spare_only(self):
+		game = BowlingGame([5, 5, 7, 3, 4, 6, 8, 2, 3, 7, 9, 1, 2, 8,4, 6, 3, 7, 8, 2,5])
+		exp=153
+		try:
+			t=game.result()
+		except Exception as e:
+			raise e
+		self.assertEqual(t,exp)
 
 
 
