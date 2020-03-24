@@ -1,3 +1,4 @@
+import sys
 class BowlingGame(object):
 	"""docstring for BowlingGame"""
 	score=0
@@ -25,11 +26,14 @@ class BowlingGame(object):
 				self.score+=self.lst[x]+self.lst[x+1]
 				x+=1
 			x+=1
-			# print(self.score)
-			
-		# print(self.score)
 		return self.score
 	def __str__(self):
 		return self.score
 	def __repr__(self):
 		return self.lst
+def main():
+	arg=sys.argv[1]
+	game=BowlingGame(arg)
+	print(game.score)
+if __name__ == '__main__':
+	main()
