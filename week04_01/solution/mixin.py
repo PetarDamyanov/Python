@@ -46,9 +46,24 @@ class XMlAble:
     def to_xml(self):
         elem = Element(self.__class__.__name__)
         for key, val in self.__dict__.items():
-            child = Element(key)
-            child.text = str(val)
-            elem.append(child)
+            
+            if type(val)==type(dict()):
+                child=Element(key)
+                for kd,vd in val.items():
+                    child_dict=Element(kd)
+                    child_dict.text=str(vd)
+                    child.append(child_dict)
+                elem.append(child)
+            elif type(val)==type(list()):
+                for x in val:
+                    child=Element(key)
+                    child.text=str(x)
+                    elem.append(child)
+            # if type(val)==type(str):
+            else:
+                child = Element(key)
+                child.text = str(val)
+                elem.append(child)
         return elem
 
     @classmethod

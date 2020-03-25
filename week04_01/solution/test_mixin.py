@@ -1,3 +1,4 @@
+from pprint import pprint
 import unittest
 import json
 from xml.etree.ElementTree import tostring
@@ -114,19 +115,20 @@ class TestXmlable(unittest.TestCase):
 
         self.assertEqual(tostring(result),expexted )
 
-    # def test_to_xml_returns_correct_xml_with_arguments(self):
-    #     panda = Panda(
-    #         name='Marto',
-    #         age=20,
-    #         weight=100.10,
-    #         food=['bamboo', 'grass'],
-    #         skills={'eat': 100, 'sleep': 200}
-    #     )
+    def test_to_xml_returns_correct_xml_with_arguments(self):
+        panda = Panda(
+            name='Marto',
+            age=20,
+            weight=100.10,
+            food=['bamboo', 'grass'],
+            skills={'eat': 100, 'sleep': 200}
+        )
 
-    #     panda_result = panda.to_xml()
-    #     panda_expexted = "<Panda><name>Marto</name><age>20</age><weight>100.10</age><food>bamboo"
+        panda_result = panda.to_xml()
+        pprint(tostring(panda_result))
+        panda_expexted = "<Panda><name>Marto</name><age>20</age><weight>100.10</age><food>bamboo"
 
-    #     self.assertEqual(tostring(panda_result), panda_expexted)
+        self.assertEqual(tostring(panda_result), panda_expexted)
       
     def test_xmlable_with_empty_class_from_xml(self):
         panda = Panda()
