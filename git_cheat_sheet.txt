@@ -9,3 +9,5 @@ git branch name create branch for idk why
 git status -> look at shit
 
 git remote -> see connections
+
+dont use master
