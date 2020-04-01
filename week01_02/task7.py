@@ -13,20 +13,8 @@ def numbers_to_message(pressed_sequence):
 	for x in pressed_sequence:
 		s+=(str(x))
 	str_list=s.split("-1")
-	nl=[]
-	list_helper=[]
-	for word in str_list:
-		for letter in range(0,len(word)-1):
-			list_helper.append(word[letter])
-			if word[letter]==word[letter+1]:
-				list_helper.append(word[letter+1])
-			else:
-				nl.append(list_helper)
-				list_helper=[]
-			# print(word[letter])	
 		
-		
-	print(nl)
+	print(str_list)
 numbers_to_message([2, -1, 2, 2, -1, 2, 2, 2])
 # "abc"
 numbers_to_message([2, 2, 2, 2])
