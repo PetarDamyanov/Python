@@ -1,20 +1,17 @@
 def sum_of_numbers(input_string):
-	if input_string.isdigit():
-		return int(input_string)
-	sum_of_digits=0
-	i=0
-	for x in input_string:
-		if x.isdigit():
-			pass
-		else:
-			input_string=input_string.replace(x," ")		
+    if input_string.isdigit():
+        return int(input_string)
+    sum_of_digits = 0
+    for x in input_string:
+        if x.isdigit():
+            pass
+        else:
+            input_string = input_string.replace(x, " ")
+    for x in input_string.strip(' ').split(' '):
+        if x.isdigit():
+            sum_of_digits += int(x)
 
-	# print(input_string)
-
-	for x in input_string.strip(' ').split(' '):
-		if x.isdigit():
-			sum_of_digits+=int(x)
-	print(sum_of_digits)
+    return sum_of_digits
 
 sum_of_numbers("ab125cd3")
 
