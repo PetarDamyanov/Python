@@ -1,27 +1,16 @@
 def palindrome(n):
-	n=str(n)
-	nre=n[::-1]
-	for i in range(0,len(n)-1):
-		if n[i]==nre[i]:
-			return True
-		else:
-			return False
-
-'''
-
-'''
-
+    return n == n[::-1]
 
 # if palindrome(121):
-# 	print("TRUE")
+#   print("TRUE")
 # else:
-# 	print(FALSE)
+#   print(FALSE)
 
 # if palindrome("kapak"):
-# 	print("TRUE")
+#   print("TRUE")
 # else:
-# 	print("False")
+#   print("False")
 # if palindrome("baba"):
-# 	print("TRUE")
+#   print("TRUE")
 # else:
-# 	print("FALSE")
+#   print("FALSE")

@@ -1,21 +1,21 @@
-def count_vowels(n):
-	cv=0
-	n=n.lower()
-	for x in n:
-		#print(x)
-		if x.isalpha():
-		
-			if x!="a" and x!= "e" and x!="i" and x!="o" and x!="u" and x!="y":
-				cv=cv+1
-			#print(x)
-	print(cv)
+from task6 import count_vowels
 
-count_vowels("Python")
 
-count_vowels("Theistareykjarbunga") #It's a volcano name!
+def count_consonants(n):
+    cv = 0
+    n = n.lower()
+    n = n.replace(" ", "")
+    for x in n:
+        if not count_vowels(x) and x.isalpha():
+            cv += 1
+    return cv
 
-count_vowels("grrrrgh!")
+# count_vowels("Python")
 
-count_vowels("Github is the second best thing that happend to programmers, after the keyboard!")
+# count_vowels("Theistareykjarbunga") #It's a volcano name!
 
-count_vowels("A nice day to code!")
+# count_vowels("grrrrgh!")
+
+# count_vowels("Github is the second best thing that happend to programmers, after the keyboard!")
+
+# count_vowels("A nice day to code!")

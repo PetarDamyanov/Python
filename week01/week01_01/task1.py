@@ -1,14 +1,14 @@
 def sum_of_digits(n=None):
-	if n==None:
-		return 0
-	sum=0
-	if n<0:
-		n=n*-1
-	while n>0:
-		sum+=int(str(n/10).split('.')[1])
-		n=n//10
-		#print(n)
-	return sum
+
+    if n is None:
+        return 0
+    sum = 0
+    if n < 0:
+        n = n * - 1
+    while n > 0:
+        sum += int(str(n / 10).split('.')[1])
+        n = n // 10
+    return sum
 
 # print(sum_of_digits(123))
 
