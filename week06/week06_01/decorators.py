@@ -15,20 +15,14 @@ def accepts(*args):
     return inner
 
 
-# @accepts(str)
-# def say_hello(name):
-#     return "Hello, I am {}".format(name)
-
-
-# say_hello(4)
+@accepts(str)
+def say_hello(name):
+    return "Hello, I am {}".format(name)
 
 
 @accepts(str, int)
 def deposit(name, money):
     print("{} sends {} $!".format(name, money))
-
-
-deposit("Marto", 10)
 
 
 def performance(file_name):
@@ -53,9 +47,6 @@ def something_heavy():
     return "I am done!"
 
 
-something_heavy()
-
-
 def silence(file_name):
     file = open(file_name, "w")
     file = open(file_name, "a")
@@ -63,7 +54,7 @@ def silence(file_name):
     def inner(method):
         def errors(*args, **kw):
             try:
-                result=method(*args, **kw)
+                method(*args, **kw)
             except Exception as e:
                 file.write(str(e))
                 print(e)
@@ -72,11 +63,53 @@ def silence(file_name):
     return inner
 
 
-
 @silence('errors.txt')
 def foo(x):
     if x > 50:
         raise ValueError('Omg.')
 
-foo(10)
-foo(100)
+
+def required(method):
+    def required_method(instance, *args, **kwargs):
+        method_name = method.__name__
+
+        if method_name not in instance.__dict__:
+            raise AttributeError(
+                f'All classes that inherit from "{instance.__class__.__name__}" must provide "{method_name}" method.'
+            )
+
+        return method(instance, *args, **kwargs)
+
+    return required_method
+
+
+class Animal():
+
+    @required
+    def eat(self, food):
+        pass
+
+    @required
+    def sleep(self, time=10):
+        pass
+
+
+class Dog(Animal):
+    pass
+
+
+def main():
+    say_hello(4)
+    deposit("Marto", 10)
+
+    something_heavy()
+
+    foo(10)
+    foo(100)
+
+    doggo = Dog()
+    doggo.eat()
+
+
+if __name__ == '__main__':
+    main()
