@@ -103,17 +103,16 @@ class TestXmlable(unittest.TestCase):
 
         result = panda.to_xml()
         expexted = b"<Panda />"
-        
 
-        self.assertEqual(tostring(result),expexted )
+        self.assertEqual(tostring(result), expexted)
+
     def test_xmlable_with_class(self):
         panda = Panda(name="Pesho")
 
         result = panda.to_xml()
         expexted = b"<Panda><name>Pesho</name></Panda>"
-        
 
-        self.assertEqual(tostring(result),expexted )
+        self.assertEqual(tostring(result), expexted)
 
     def test_to_xml_returns_correct_xml_with_arguments(self):
         panda = Panda(
@@ -129,24 +128,20 @@ class TestXmlable(unittest.TestCase):
         panda_expexted = "<Panda><name>Marto</name><age>20</age><weight>100.10</age><food>bamboo"
 
         self.assertEqual(tostring(panda_result), panda_expexted)
-      
+
     def test_xmlable_with_empty_class_from_xml(self):
         panda = Panda()
-        panda_expexted=panda.to_xml()
-        expexted=Panda.from_xml(tostring(panda_expexted))
+        panda_expexted = panda.to_xml()
+        expexted = Panda.from_xml(tostring(panda_expexted))
 
-        self.assertEqual(panda,expexted)
-    
+        self.assertEqual(panda, expexted)
+
     def test_xmlable_with_class_from_xml(self):
         panda = Panda(name="Pesho")
-        panda_expexted=panda.to_xml()
+        panda_expexted = panda.to_xml()
         # print(tostring(panda_expexted))
         expexted = Panda.from_xml(tostring(panda_expexted))
-        self.assertEqual(panda,expexted)
-    
-
-
-
+        self.assertEqual(panda, expexted)
 
 
 if __name__ == '__main__':
