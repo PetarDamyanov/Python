@@ -38,7 +38,7 @@ def random_letter(alphabet):
 
 
 def generate_word(up=None):
-    world_len = rand(0, 20)
+    world_len = rand(0, 10)
     word = ""
     for letter in range(0, world_len):
         if up and letter == 0:
@@ -58,16 +58,16 @@ def radnom_dots_postions(chapter_len):
 def generate_chapter_content(chapter_len):
     content = ""
     dots_list = radnom_dots_postions(chapter_len)
-    for words in range(0, chapter_len):
+    content += generate_word(up=True)
+    for words in range(1, chapter_len):
         for dots in dots_list:
-            if words == dots:
+            if words == dots and words != 0:
                 content += ".\n"
                 content += generate_word(up=True)
             elif words != 0 and words + 1 != dots:
                 content += " "
-            elif words == 0:
-                content += generate_word(up=True)
-            content += generate_word()
+                content += generate_word()
+    content += ".\n"
     return content
 
 
