@@ -1,52 +1,58 @@
 from datetime import datetime, timedelta
-import unittest
+
 
 def validate_conditions(conditions):
     counter = 0
+
     for condition in conditions:
         if not condition.get('hours'):
             counter += 1
-        if condition.get('hours',0) > 24:
+        if condition.get('hours', 0) > 24:
             raise ValueError('Hours cannot be > 24.')
 
     if counter != 1:
         raise ValueError('Invalid conditions.')
 
+
 def ensure_conditions(conditions):
-    # Ensure all condtions have hoursif
-    # if validate_conditions(conditions)
     for condition in conditions:
-        if not condition.get('hours'):
-            condition.update({"hours":0})
-    # if condition in conditions:
-    #     if not condition.get('hours'):
-    #         raise ValueError("Invalid conditions.")
-    # return conditions
+        if 'hours' not in condition.keys():
+            condition['hours'] = 0
+
+    return conditions
 
 
-def group_conditions(conditions):
-    # TODO
-    l=[]
-    for x in range(0,len(conditions)-1):
-        l.append((conditions[x].get('hours'),conditions[x+1].get('hours'),conditions[x].get('percent')) )
-    return l
+def pair_conditions(conditions):
+    result = []
+
+    for index in range(len(conditions) - 1):
+        left = conditions[index]
+        right = conditions[index + 1]
+
+        result.append((left, right))
+
+    return result
 
 
-def get_current_condition(conditions, start, now):
-    h=(start-now).total_seconds()/3600
-    # print(h)
-    if h<=0:
-        return 100
-    if h>=int(conditions[0][0]):
-        return int(conditions[0][2])
-    for condition in conditions:
-        if h<=int(condition[0]) and h>int(condition[1]):
-            return int(condition[2])
-        # print("{0}-{1}".format(int(condition[0]),int(condition[1])))
+def get_current_condition(pairs, start, now):
+    for pair in pairs:
+        lower_condition, higher_condition = pair
+
+        lower_date = start - timedelta(hours=lower_condition['hours'])
+        upper_date = start - timedelta(hours=higher_condition['hours'])
+
+        if (now >= lower_date and now < upper_date):
+            return higher_condition['percent']
+
+    return pairs[0][0]['percent']
 
 
 def get_cancellation_fee(price, percent):
-    return int(price * (percent / 100))
+    return price * (percent / 100)
+
+
+def sort_conditions(conditions):
+    return sorted(conditions, key=lambda c: c['hours'], reverse=True)
 
 
 def get_cancellation_policy(
@@ -55,7 +61,20 @@ def get_cancellation_policy(
     start,
     now
 ):
-    assert start < now
+    assert now < start, 'Invalid booking start.'
+    validate_conditions(conditions)
+
+    ensured_conditions = ensure_conditions(conditions)
+
+    if (len(ensured_conditions)) == 1:
+        return get_cancellation_fee(price, ensured_conditions[0]['percent'])
+
+    sorted_conditions = sort_conditions(ensured_conditions)
+    paired_conditions = pair_conditions(sorted_conditions)
+
+    current = get_current_condition(paired_conditions, start, now)
+
+    return get_cancellation_fee(price, current)
 
 
 def main():
@@ -68,14 +87,6 @@ def main():
         {'hours': 6, 'percent': 80},
         {'percent': 100}
     ]
-    conditions=validate_conditions(conditions)
-    percent=0
-    if len(conditions)>1:
-        conditions=group_conditions(conditions)
-        percent=get_current_condition(conditions,booking_start,now)
-    else:
-        percent=conditions.get('percent')
-    get_cancellation_fee(price,percent)
 
     result = get_cancellation_policy(
         conditions,
@@ -83,10 +94,6 @@ def main():
         booking_start,
         now
     )
-
-
-
-
     print(result)
 
 
