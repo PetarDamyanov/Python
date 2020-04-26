@@ -46,7 +46,7 @@ def get_current_condition(pairs, end):
 
         if (my_now.now() >= lower_date and my_now.now() < upper_date):
             return higher_condition['percent']
-    
+
     return pairs[0][0]['percent']
 
 

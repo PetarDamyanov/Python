@@ -137,7 +137,7 @@ class TestPairConditions(unittest.TestCase):
 class TestGetCurrentCondition(unittest.TestCase):
 
     @patch('cancellation_policy.my_now', autospec=True)
-    def test_with_current_date_before_min_condition_date_should_return_min_condition_percent(self,datetime_mock):
+    def test_with_current_date_before_min_condition_date_should_return_min_condition_percent(self, datetime_mock):
         datetime_mock.now.return_value = datetime(2020, 4, 29)
         conditions = [
             ({'hours': 24, 'percent': 0}, {'hours': 18, 'percent': 20}),
