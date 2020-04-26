@@ -53,9 +53,8 @@ def deep_find_all(data, key, found=None):
     for k, v in data.items():
         if isinstance(v, dict):
             result = deep_find_all(v, key, found)
-            # print(result)
             if result is not None:
-                found.append(result)
+                return result
     return found
 
 

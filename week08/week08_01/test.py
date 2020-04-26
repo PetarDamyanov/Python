@@ -13,19 +13,19 @@ class TestDeepFind(unittest.TestCase):
         self.assertEqual(deep_find(graph, 'aa'), 11)
 
     def test_deep_find_third_level(self):
-        graph = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa', 111}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
+        graph = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa': 111}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
         self.assertEqual(deep_find(graph, 'ddd'), 22)
 
 
-# class TestDeepFindAll(unittest.TestCase):
+class TestDeepFindAll(unittest.TestCase):
 
-#     def test_deep_find_all_second_level(self):
-#         graph = {'a': 1, 'b': {'a': 11, 'bb': 2}, 'c': 3}
-#         self.assertEqual(deep_find_all(graph, 'a'), [1, 11])
+    def test_deep_find_all_second_level(self):
+        graph = {'a': 1, 'b': {'a': 11, 'bb': 2}, 'c': 3}
+        self.assertEqual(deep_find_all(graph, 'a'), [1, 11])
 
-#     def test_deep_find_all_third_level(self):
-#         graph = {'a': 1, 'b': {'a': 11, 'bb': {'a', 111}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
-#         self.assertEqual(deep_find_all(graph, 'a'), [1, 11, 111])
+    def test_deep_find_all_third_level(self):
+        graph = {'a': 1, 'b': {'a': 11, 'bb': {'a': 111}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
+        self.assertEqual(deep_find_all(graph, 'a'), [1, 11, 111])
 
 
 class TestDeepUpdate(unittest.TestCase):
@@ -41,7 +41,7 @@ class TestDeepUpdate(unittest.TestCase):
         self.assertEqual(deep_find(graph, 'aa'), 55)
 
     def test_deep_update_third_level(self):
-        graph = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa', 111}}, 'c': 3, 'd': {'dd': {'ddd': 55}}}
+        graph = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa': 111}}, 'c': 3, 'd': {'dd': {'ddd': 55}}}
         deep_update(graph, 'ddd', 55)
         self.assertEqual(deep_find(graph, 'ddd'), 55)
 
@@ -59,8 +59,8 @@ class TestDeepCompare(unittest.TestCase):
         self.assertTrue(deep_compare(graph, graph2))
 
     def test_deep_copmare_third_level(self):
-        graph = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa', 111}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
-        graph2 = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa', 111}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
+        graph = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa': 111}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
+        graph2 = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa': 111}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
         self.assertTrue(deep_compare(graph, graph2))
 
     def test_deep_compare_single_level_false(self):
@@ -74,8 +74,8 @@ class TestDeepCompare(unittest.TestCase):
         self.assertFalse(deep_compare(graph, graph2))
 
     def test_deep_copmare_third_level_false(self):
-        graph = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa', 111}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
-        graph2 = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa', 11}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
+        graph = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa': 111}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
+        graph2 = {'a': 1, 'b': {'aa': 11, 'bb': {'aaa': 11}}, 'c': 3, 'd': {'dd': {'ddd': 22}}}
         self.assertFalse(deep_compare(graph, graph2))
 
 
