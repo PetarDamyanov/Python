@@ -1,0 +1,30 @@
+SELECT address from STUDIO WHERE name='MGM'
+
+SELECT birthdate from MOVIESTAR WHERE name='Kim Basinger'
+
+SELECT networth from MOVIEEXEC WHERE networth>10000000
+
+
+SELECT name from MOVIESTAR WHERE address="Prefect Rd" or gender="M"
+
+INSERT INTO MOVIESTAR VALUES('Zahari Baharov','Gorno Nadolnishte','M','1977-07-07')
+
+DELETE FROM STUDIO WHERE address LIKE "%5%"
+
+UPDATE MOVIE SET studioname = "Fox" WHERE title like "%star%"
+
+
+SELECT MOVIESTAR.name,MOVIE.TITLE from STARSIN join MOVIESTAR on MOVIESTAR.NAME = STARSIN.STARNAME JOIN MOVIE on MOVIE.title=STARSIN.MOVIETITLE WHERE title = 'Terms of Endearment' 
+
+
+SELECT MOVIESTAR.name,MOVIE.TITLE from STARSIN join MOVIESTAR on MOVIESTAR.NAME = STARSIN.STARNAME JOIN MOVIE on MOVIE.title=STARSIN.MOVIETITLE join STUDIO ON STUDIO.NAME=MOVIE.STUDIONAME WHERE STUDIO.name='MGM' AND MOVIE.year=1995 
+
+
+ALTER TABLE STUDIO ADD COLUMN president varchar(255)
+
+UPDATE STUDIO SEt president="Boiko Borisov" WHERE name="MGM"
+
+
+UPDATE STUDIO set president="Rumen Radev" WHERE name="USA Entertainm."
+
+SELECT president FROM STUDIO WHERE STUDIO.name='MGM'
